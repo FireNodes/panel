@@ -1,12 +1,11 @@
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { ErrorResponse } from "../../../sdk/dist/api.js";
+import { ErrorResponse, PanelApi } from "@flowtr/panel-sdk";
 
-// TODO: move client-side api to sdk
-export const api = axios.create({
-    baseURL: (import.meta.env.API || "http://localhost:8080").toString(),
-});
+export const handleError = (err?: string) => err && toast.dark(err);
 
-export const handleError = <T extends ErrorResponse = ErrorResponse>(
-    err: AxiosError<ErrorResponse>
-) => toast.dark(err.response?.data.error?.translation || err.message);
+export const api = new PanelApi(
+    (import.meta.env.API || "http://localhost:8080").toString(),
+    sessionStorage,
+    handleError
+);

@@ -29,6 +29,10 @@ export const Layout = () => (
                         autoClose={5000}
                         pauseOnHover
                     />
+                    <Route path="/">
+                        {/*TODO: configurable welcome message*/}
+                        <Text>Welcome to your new panel instance.</Text>
+                    </Route>
                     <Route path="/dashboard/login">
                         <Login />
                     </Route>

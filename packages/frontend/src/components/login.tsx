@@ -17,16 +17,7 @@ export const Login: FC<Record<string, unknown>> = () => {
     } = useForm();
     const onSubmit = (data: { username: string; password: string }) => {
         console.log(data);
-        api.post<LoginResponse>("/auth/login", data)
-            .then((res) => {
-                // TODO: better error message api
-                if (res.status !== 200)
-                    return toast(res.data.error?.translation);
-                if (res.data.token)
-                    localStorage.setItem("token", res.data.token);
-                setLocation("/dashboard/profile");
-            })
-            .catch((err: AxiosError) => handleError(err));
+        api.login(data).then(() => setLocation("/dashboard/profile"));
     };
 
     return (

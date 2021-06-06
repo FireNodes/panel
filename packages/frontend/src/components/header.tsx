@@ -12,7 +12,9 @@ export const Header = () => (
         backgroundColor="blackAlpha.300"
     >
         <Heading color="pink.500" fontWeight="bold">
-            Flowtr Panel
+            <Link as={WLink} href="/">
+                Flowtr Panel
+            </Link>
         </Heading>
         <Flex
             className="header-profile"

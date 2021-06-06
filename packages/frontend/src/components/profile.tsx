@@ -11,26 +11,21 @@ export const Profile: FC<Record<string, unknown>> = () => {
     const [, setLocation] = useLocation();
 
     useEffect(() => {
-        api.get<ProfileResponse>("/auth/profile", {
-            headers: {
-                Authorization: localStorage.getItem("token"),
-            },
-        })
+        api.getProfile()
             .then((res) => {
-                if (res.status !== 200)
-                    return toast(res.data.error?.translation);
                 setUser(res.data.user);
-                if (!res.data.user) setLocation("/dashboard/login");
             })
-            .catch((err) => handleError(err));
+            .catch(() => setLocation("/dashboard/login"));
     }, []);
 
     return (
         <Flex flexDir="column" justifyContent="center" alignItems="center">
-            <Heading as="h2">Welcome, {toTitleCase(user?.username)}</Heading>
+            <Heading as="h2" mb="0.5em">
+                Welcome, {toTitleCase(user?.username)}
+            </Heading>
             <Button
                 onClick={() => {
-                    localStorage.removeItem("token");
+                    sessionStorage.removeItem("token");
                     setLocation("/dashboard/login");
                 }}
             >
