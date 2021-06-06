@@ -12,7 +12,7 @@
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "declaration": true,
-        "outDir": "dist"
+        "outDir": "dist/cjs"
     },
     "include": ["src"],
     "exclude": ["node_modules", "test/**/*.ts"]

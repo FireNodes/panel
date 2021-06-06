@@ -5,6 +5,7 @@ import * as jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
 import cors from "cors";
 import { errors } from "@flowtr/panel-sdk";
+import Docker from "dockerode";
 
 // TODO: cli for migration and running the server w/ yargs
 export const startBackend = async () => {
@@ -14,6 +15,8 @@ export const startBackend = async () => {
     const app = express();
     app.disable("etag");
     app.use(cors(), express.json());
+
+    const docker = new Docker();
 
     const getAuth = (req: Request, res: Response) => {
         const authHeader = req.headers.authorization;
@@ -75,6 +78,16 @@ export const startBackend = async () => {
         );
         return res.json({
             token,
+        });
+    });
+
+    app.get("/deployment/all", async (req, res) => {
+        const containers = await docker.listContainers();
+        const filteredContainers = containers.map((c) =>
+            c.Names[0].startsWith("deployment_")
+        );
+        return res.json({
+            filteredContainers,
         });
     });
 
