@@ -1,51 +1,32 @@
 {
-    "name": "@toes/typescript-template",
-    "version": "0.0.1",
-    "description": "",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "config": {
-        "commitizen": {
-            "path": "cz-conventional-changelog"
-        }
-    },
-    "husky": {
-        "hooks": {
-            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-        }
-    },
-    "scripts": {
-        "cm": "cz",
-        "build": "tsc --build",
-        "prepublishOnly": "pnpm run lint && pnpm run test && pnpm run build",
-        "test": "ts-mocha test/**/*.ts",
-        "lint": "eslint {src,test}/**/*.ts --fix",
-        "coverage": "nyc ts-mocha test/**/*.ts",
-        "prepare": "husky install"
-    },
-    "keywords": [
-        "typescript",
-        "node"
+    "name": "@flowtr/panel",
+    "version": "1.0.0",
+    "author": "Theo Paris <theoparisdesigns@gmail.com>",
+    "license": "GPL-3.0-or-later",
+    "private": true,
+    "workspaces": [
+        "packages/*"
     ],
-    "author": "Theo Paris",
-    "license": "UNLICENSE",
+    "scripts": {
+        "lint": "eslint packages/*/src/**/*.{ts,tsx} --fix"
+    },
     "devDependencies": {
-        "@types/chai": "4.2.16",
+        "@types/chai": "4.2.18",
         "@types/mocha": "8.2.2",
-        "@types/node": "14.14.41",
-        "@typescript-eslint/eslint-plugin": "4.22.0",
-        "@typescript-eslint/parser": "4.22.0",
+        "@types/node": "15.12.1",
+        "@typescript-eslint/eslint-plugin": "4.26.0",
+        "@typescript-eslint/parser": "4.26.0",
         "chai": "4.3.4",
-        "commitizen": "^4.2.3",
+        "commitizen": "^4.2.4",
         "cz-conventional-changelog": "^3.3.0",
-        "eslint": "7.26.0",
+        "eslint": "7.28.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-prettier": "3.4.0",
-        "husky": "6.0.0",
-        "mocha": "8.3.2",
+        "mocha": "8.4.0",
         "nyc": "15.1.0",
-        "prettier": "2.2.1",
+        "prettier": "2.3.1",
         "ts-mocha": "8.0.0",
         "typescript": "4.2.4"
     }
 }
+

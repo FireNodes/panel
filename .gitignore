@@ -11,11 +11,12 @@ logs
 
 # Environment
 *.env*
+config.yml
 
 # Misc
 .DS_Store
 .dccache
 
 # IDE Settings
-.vscode
 .idea
+data/

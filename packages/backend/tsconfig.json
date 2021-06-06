@@ -11,7 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
-        "declaration": false,
+        "declaration": true,
         "outDir": "dist"
     },
     "include": ["src"],

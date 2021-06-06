@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "declaration": false,
+        "removeComments": true,
+        "types": ["vite/client"],
+        "jsx": "preserve",
+        "outDir": "dist"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "test/**/*.ts"]
+}
