@@ -10,8 +10,8 @@ importers:
       '@typescript-eslint/eslint-plugin': 4.26.0
       '@typescript-eslint/parser': 4.26.0
       chai: 4.3.4
-      commitizen: ^4.2.4
-      cz-conventional-changelog: ^3.3.0
+      commitizen: 4.2.4
+      cz-conventional-changelog: 3.3.0
       eslint: 7.28.0
       eslint-config-prettier: 8.3.0
       eslint-plugin-prettier: 3.4.0
@@ -41,41 +41,41 @@ importers:
   packages/backend:
     specifiers:
       '@flowtr/panel-sdk': workspace:*
-      '@theoparis/config': ^1.0.4
-      '@types/bcrypt': ^5.0.0
+      '@theoparis/config': 1.0.4
+      '@types/bcrypt': 5.0.0
       '@types/chai': 4.2.18
-      '@types/cors': ^2.8.10
-      '@types/dockerode': ^3.2.3
-      '@types/express': ^4.17.12
-      '@types/jsonwebtoken': ^8.5.1
+      '@types/cors': 2.8.10
+      '@types/dockerode': 3.2.3
+      '@types/express': 4.17.12
+      '@types/jsonwebtoken': 8.5.1
       '@types/mocha': 8.2.2
       '@types/node': 15.12.1
-      '@types/yargs': ^17.0.0
+      '@types/yargs': 17.0.0
       '@typescript-eslint/eslint-plugin': 4.26.0
       '@typescript-eslint/parser': 4.26.0
-      axios: ^0.21.1
-      bcrypt: ^5.0.1
+      axios: 0.21.1
+      bcrypt: 5.0.1
       chai: 4.3.4
-      commitizen: ^4.2.4
-      cors: ^2.8.5
-      cz-conventional-changelog: ^3.3.0
-      dockerode: ^3.3.0
+      commitizen: 4.2.4
+      cors: 2.8.5
+      cz-conventional-changelog: 3.3.0
+      dockerode: 3.3.0
       eslint: 7.28.0
       eslint-config-prettier: 8.3.0
       eslint-plugin-prettier: 3.4.0
-      express: ^4.17.1
-      jsonwebtoken: ^8.5.1
+      express: 4.17.1
+      jsonwebtoken: 8.5.1
       mocha: 8.4.0
-      nanoid: ^3.1.23
+      nanoid: 3.1.23
       nyc: 15.1.0
-      pg: ^8.6.0
+      pg: 8.6.0
       prettier: 2.3.1
       ts-mocha: 8.0.0
-      ts-node-dev: ^1.1.6
-      typeorm: ^0.2.34
+      ts-node-dev: 1.1.6
+      typeorm: 0.2.34
       typescript: 4.2.4
-      yargs: ^17.0.1
-      zod: ^3.0.0-alpha.29
+      yargs: 17.0.1
+      zod: 3.1.0
     dependencies:
       '@flowtr/panel-sdk': link:../sdk
       '@theoparis/config': 1.0.4
@@ -117,37 +117,37 @@ importers:
 
   packages/frontend:
     specifiers:
-      '@chakra-ui/icons': ^1.0.13
-      '@chakra-ui/react': ^1.6.3
-      '@emotion/react': ^11.4.0
-      '@emotion/styled': ^11.3.0
+      '@chakra-ui/icons': 1.0.13
+      '@chakra-ui/react': 1.6.3
+      '@emotion/react': 11.4.0
+      '@emotion/styled': 11.3.0
       '@flowtr/panel-sdk': workspace:*
-      '@fontsource/fira-code': ^4.4.5
-      '@preact/preset-vite': ^2.1.0
+      '@fontsource/fira-code': 4.4.5
+      '@preact/preset-vite': 2.1.0
       '@types/chai': 4.2.18
       '@types/mocha': 8.2.2
       '@types/node': 15.12.1
       '@typescript-eslint/eslint-plugin': 4.26.0
       '@typescript-eslint/parser': 4.26.0
-      axios: ^0.20.0-0
+      axios: 0.20.0-0
       chai: 4.3.4
-      commitizen: ^4.2.4
-      cz-conventional-changelog: ^3.3.0
+      commitizen: 4.2.4
+      cz-conventional-changelog: 3.3.0
       eslint: 7.28.0
       eslint-config-prettier: 8.3.0
       eslint-plugin-prettier: 3.4.0
-      framer-motion: ^4.1.17
+      framer-motion: 4.1.17
       mocha: 8.4.0
       nyc: 15.1.0
-      preact: ^10.5.13
+      preact: 10.5.13
       prettier: 2.3.1
-      react-hook-form: ^7.8.1
-      react-toastify: ^7.0.4
+      react-hook-form: 7.8.3
+      react-toastify: 7.0.4
       ts-mocha: 8.0.0
       typescript: 4.2.4
-      vite: ^2.3.6
-      vite-plugin-env-compatible: ^1.0.0
-      wouter: ^2.7.4
+      vite: 2.3.7
+      vite-plugin-env-compatible: 1.0.0
+      wouter: 2.7.4
     dependencies:
       '@chakra-ui/icons': 1.0.13
       '@chakra-ui/react': 1.6.3_8f6261c1265497b0cca547fbcabc3dc2
@@ -158,11 +158,11 @@ importers:
       axios: 0.20.0-0
       framer-motion: 4.1.17
       preact: 10.5.13
-      react-hook-form: 7.8.1
+      react-hook-form: 7.8.3
       react-toastify: 7.0.4
       wouter: 2.7.4
     devDependencies:
-      '@preact/preset-vite': 2.1.0_preact@10.5.13+vite@2.3.6
+      '@preact/preset-vite': 2.1.0_preact@10.5.13+vite@2.3.7
       '@types/chai': 4.2.18
       '@types/mocha': 8.2.2
       '@types/node': 15.12.1
@@ -179,7 +179,7 @@ importers:
       prettier: 2.3.1
       ts-mocha: 8.0.0_mocha@8.4.0
       typescript: 4.2.4
-      vite: 2.3.6
+      vite: 2.3.7
       vite-plugin-env-compatible: 1.0.0
 
   packages/sdk:
@@ -191,8 +191,8 @@ importers:
       '@typescript-eslint/parser': 4.26.0
       axios: ^0.21.1
       chai: 4.3.4
-      commitizen: ^4.2.4
-      cz-conventional-changelog: ^3.3.0
+      commitizen: 4.2.4
+      cz-conventional-changelog: 3.3.0
       eslint: 7.28.0
       eslint-config-prettier: 8.3.0
       eslint-plugin-prettier: 3.4.0
@@ -1390,17 +1390,17 @@ packages:
     resolution: {integrity: sha512-1oO6+dN5kdIA3sKPZhRGJTfGVP4SWV6KqlMOwry4J3HfyD68sl/3KmG7DeYUzvN+RbhXDnv/D8vNNB8168tAMg==}
     dev: false
 
-  /@preact/preset-vite/2.1.0_preact@10.5.13+vite@2.3.6:
+  /@preact/preset-vite/2.1.0_preact@10.5.13+vite@2.3.7:
     resolution: {integrity: sha512-4kJgbitw/ESjO21QwJNN8/DQ40cq4t8hsADKqAEUIXXVsvGecz0JRaMwrA+yy4S0AcUQz7rJvquEFTmsvotSGg==}
     peerDependencies:
       '@babel/core': 7.x
       vite: 2.x
     dependencies:
-      '@prefresh/vite': 2.2.2_preact@10.5.13+vite@2.3.6
+      '@prefresh/vite': 2.2.2_preact@10.5.13+vite@2.3.7
       babel-plugin-transform-hook-names: 1.0.2
       debug: 4.3.1
       kolorist: 1.4.1
-      vite: 2.3.6
+      vite: 2.3.7
     transitivePeerDependencies:
       - preact
       - rollup
@@ -1423,7 +1423,7 @@ packages:
     resolution: {integrity: sha512-MUhT5m2XNN5NsZl4GnpuvlzLo6VSTa/+wBfBd3fiWUvHGhv0GF9hnA1pd//v0uJaKwUnVRQ1hYElxCV7DtYsCQ==}
     dev: true
 
-  /@prefresh/vite/2.2.2_preact@10.5.13+vite@2.3.6:
+  /@prefresh/vite/2.2.2_preact@10.5.13+vite@2.3.7:
     resolution: {integrity: sha512-cPQZAuorYCIMxBkH7zGJ75mHfPltWoW6ADdnphQ6J0PzndsJ2w6eiu30ydMW6RGMg2vIGxgAAl/vBkwS7WFqBw==}
     peerDependencies:
       preact: ^10.4.0
@@ -1435,7 +1435,7 @@ packages:
       '@prefresh/utils': 1.1.1
       '@rollup/pluginutils': 4.1.0
       preact: 10.5.13
-      vite: 2.3.6
+      vite: 2.3.7
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -4593,8 +4593,8 @@ packages:
       - '@types/react'
     dev: false
 
-  /react-hook-form/7.8.1:
-    resolution: {integrity: sha512-pwWxd4UfwsKVh/W2YE2Hnu7KBY4KTCZq3QO1PMISzP31AZ5Kmv6ji085QVIHVWVSLT4oX6IhmZ2bWJ2oBIwobQ==}
+  /react-hook-form/7.8.3:
+    resolution: {integrity: sha512-W444tNhyyR3eaQjgtdVOvzId8Fjoexdfko0d46Nme/3Cjo3ETcF9kSVg51ut8mI805Wh2K1GKim+hEgcfIrFLA==}
     peerDependencies:
       react: ^16.8.0 || ^17
     dev: false
@@ -5540,8 +5540,8 @@ packages:
     resolution: {integrity: sha512-HiuxdZZPDxgTMY5X2gJuwYRCW0Gb50PmsN+tIRIihoCYU3cqLaLuw95BQq803LnsAZ3KuNYvCh6yJMFA5PuA/w==}
     dev: true
 
-  /vite/2.3.6:
-    resolution: {integrity: sha512-fsEpNKDHgh3Sn66JH06ZnUBnIgUVUtw6ucDhlOj1CEqxIkymU25yv1/kWDPlIjyYHnalr0cN6V+zzUJ+fmWHYw==}
+  /vite/2.3.7:
+    resolution: {integrity: sha512-Y0xRz11MPYu/EAvzN94+FsOZHbSvO6FUvHv127CyG7mV6oDoay2bw+g5y9wW3Blf8OY3chaz3nc/DcRe1IQ3Nw==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
