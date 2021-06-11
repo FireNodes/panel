@@ -1,0 +1,4 @@
+database:
+    uri: "postgresql://root:toor@localhost/panel"
+# Set this to a secure constant value
+jwtSecret: "12345"
