@@ -7,6 +7,11 @@
     "workspaces": [
         "packages/*"
     ],
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
+    },
     "scripts": {
         "lint": "eslint packages/*/src/**/*.{ts,tsx} --fix",
         "build": "pnpm run build -r",
