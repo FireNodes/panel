@@ -41,7 +41,7 @@ export const Layout = () => (
                     <Route path="/dashboard/profile">
                         <Profile />
                     </Route>
-                    <Route path="/deployment/all">
+                    <Route path="/dashboard/deployments">
                         <ContainerList />
                     </Route>
                 </Flex>

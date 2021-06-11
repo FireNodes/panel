@@ -69,7 +69,9 @@ export const Header = () => {
                     <MenuList>
                         {token && (
                             <MenuItem
-                                onClick={() => setLocation("/deployment/all")}
+                                onClick={() =>
+                                    setLocation("/dashboard/deployments")
+                                }
                             >
                                 Deployments
                             </MenuItem>
