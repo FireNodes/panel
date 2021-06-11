@@ -99,13 +99,12 @@ export const startBackend = async () => {
                 return res.status(500).json({
                     error: errors.userNotFound,
                 } as ErrorResponse);
-            let filteredContainers: Docker.ContainerInfo[];
             /*             if (!user?.roles.includes("deployer"))
                 return res.status(400).json({
                     error: errors.denied,
                 } as ErrorResponse); */
             const containers = await docker.listContainers();
-            filteredContainers = containers.filter(
+            const filteredContainers = containers.filter(
                 (c) =>
                     c.Names.some((n) => n.startsWith("/deployment_")) &&
                     c.Labels["com.firenodes.panel.user"] === req.user?.id
