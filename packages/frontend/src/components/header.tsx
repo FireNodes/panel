@@ -35,9 +35,8 @@ export const Header = () => {
         storage.onChanged.addListener(handleStorage);
 
         return () => {
-            if (storage.onChanged.hasListener(handleStorage)) {
+            if (storage.onChanged.hasListener(handleStorage))
                 storage.onChanged.removeListener(handleStorage);
-            }
         };
     }, [token]);
 
@@ -65,7 +64,7 @@ export const Header = () => {
             >
                 <Menu>
                     <MenuButton>
-                        <Avatar size="md" alt="Links" mb="0.5em"/>
+                        <Avatar size="md" alt="Links" mb="0.5em" />
                     </MenuButton>
                     <MenuList>
                         {token && (
