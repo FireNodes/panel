@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { connectToDatabase, User } from "./database/index.js";
 import { loadConfig } from "./config";
 import * as jwt from "jsonwebtoken";
@@ -40,16 +40,17 @@ export const startBackend = async () => {
         }
     };
 
-    const getUser = async (req: Request, res: Response) => {
+    const getUser = async (req: Request, res: Response, next: NextFunction) => {
         const parsed = getAuth(req, res);
-        if (parsed && parsed["id"])
-            return await User.findOne({ id: parsed["id"] });
+        if (parsed && parsed["id"]) {
+            req.user = await User.findOne({ id: parsed["id"] });
+            next();
+        }
     };
 
     // TODO: admin only
-    app.get("/user/all", async (req, res) => {
-        const user = await getUser(req, res);
-        if (!user?.roles.includes("admin"))
+    app.get("/user/all", getUser, async (req, res) => {
+        if (!req.user?.roles.includes("admin"))
             return res.status(400).json({
                 error: errors.denied,
             } as ErrorResponse);
@@ -59,11 +60,10 @@ export const startBackend = async () => {
         });
     });
 
-    app.get("/auth/profile", async (req, res) => {
-        const user = await getUser(req, res);
-        if (user)
+    app.get("/auth/profile", getUser, async (req, res) => {
+        if (req.user)
             return res.json({
-                user,
+                user: req.user,
             } as ProfileResponse);
     });
 
@@ -93,23 +93,24 @@ export const startBackend = async () => {
         } as LoginResponse);
     });
 
-    app.get("/deployment/all", async (req, res) => {
+    app.get("/deployment/all", getUser, async (req, res) => {
         try {
-            const user = await getUser(req, res);
-            if (!user)
+            if (!req.user)
                 return res.status(500).json({
                     error: errors.userNotFound,
                 } as ErrorResponse);
+            let filteredContainers: Docker.ContainerInfo[];
             /*             if (!user?.roles.includes("deployer"))
                 return res.status(400).json({
                     error: errors.denied,
                 } as ErrorResponse); */
             const containers = await docker.listContainers();
-            const filteredContainers = containers.filter(
+            filteredContainers = containers.filter(
                 (c) =>
                     c.Names.some((n) => n.startsWith("/deployment_")) &&
-                    c.Labels["com.firenodes.panel.user"] === user.id
+                    c.Labels["com.firenodes.panel.user"] === req.user?.id
             );
+
             return res.json({
                 containers: filteredContainers.map(
                     (c) =>
@@ -130,7 +131,7 @@ export const startBackend = async () => {
                 ),
             });
         } catch (err) {
-            res.status(500).json({
+            return res.status(500).json({
                 error: errors.dockerFetch,
             } as ErrorResponse);
         }

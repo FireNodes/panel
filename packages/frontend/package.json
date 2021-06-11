@@ -43,21 +43,26 @@
         "prettier": "2.3.1",
         "ts-mocha": "8.0.0",
         "typescript": "4.2.4",
-        "vite-plugin-env-compatible": "1.0.0",
-        "vite": "2.3.7"
+        "vite": "2.3.7",
+        "vite-plugin-env-compatible": "1.0.0"
     },
     "dependencies": {
-        "@chakra-ui/icons": "1.0.13",
         "@chakra-ui/react": "1.6.3",
         "@emotion/react": "11.4.0",
         "@emotion/styled": "11.3.0",
-        "@fontsource/fira-code": "4.4.5",
         "@flowtr/panel-sdk": "workspace:*",
+        "@fontsource/fira-code": "4.4.5",
+        "@fontsource/open-sans": "^4.4.5",
+        "@fontsource/poppins": "^4.4.5",
+        "@fortawesome/fontawesome-svg-core": "^1.2.35",
+        "@fortawesome/free-solid-svg-icons": "^5.15.3",
+        "@fortawesome/react-fontawesome": "^0.1.14",
+        "@plq/use-persisted-state": "^1.1.2",
+        "axios": "0.20.0-0",
         "framer-motion": "4.1.17",
         "preact": "10.5.13",
-        "axios": "0.20.0-0",
-        "react-toastify": "7.0.4",
         "react-hook-form": "7.8.3",
+        "react-toastify": "7.0.4",
         "wouter": "2.7.4"
     }
 }

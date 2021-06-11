@@ -1,8 +1,9 @@
 import { Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { RepeatIcon } from "@chakra-ui/icons";
 import { IContainer, toTitleCase } from "@flowtr/panel-sdk";
 import { useEffect, useState } from "preact/hooks";
 import { api } from "../lib/api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRedo } from "@fortawesome/free-solid-svg-icons";
 
 export const ContainerList = () => {
     const [containers, setContainers] = useState<IContainer[]>([]);
@@ -19,8 +20,11 @@ export const ContainerList = () => {
             flexDirection="column"
             flexWrap="wrap"
         >
+            <Heading as="h2" mb="0.5em">
+                Deployment List
+            </Heading>
             <Button onClick={() => setReload(!reload)} mb="1.5em">
-                <RepeatIcon />
+                <FontAwesomeIcon icon={faRedo} />
             </Button>
             <Flex
                 justifyContent="center"

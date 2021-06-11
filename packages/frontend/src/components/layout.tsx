@@ -31,7 +31,9 @@ export const Layout = () => (
                     />
                     <Route path="/">
                         {/*TODO: configurable welcome message*/}
-                        <Text>Welcome to your new panel instance.</Text>
+                        <Text fontWeight="bolder" fontSize="110%">
+                            Welcome to your new panel instance.
+                        </Text>
                     </Route>
                     <Route path="/dashboard/login">
                         <Login />
