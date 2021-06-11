@@ -2,7 +2,6 @@ import {
     ChakraProvider,
     ColorModeProvider,
     Flex,
-    Heading,
     Text,
 } from "@chakra-ui/react";
 import { Router, Route } from "wouter";
@@ -11,6 +10,7 @@ import { Header } from "./header";
 import { Profile } from "./profile";
 import { Login } from "./login";
 import { ToastContainer } from "react-toastify";
+import { ContainerList } from "./deployment-list";
 
 export const Layout = () => (
     <Router>
@@ -38,6 +38,9 @@ export const Layout = () => (
                     </Route>
                     <Route path="/dashboard/profile">
                         <Profile />
+                    </Route>
+                    <Route path="/deployment/all">
+                        <ContainerList />
                     </Route>
                 </Flex>
             </ColorModeProvider>

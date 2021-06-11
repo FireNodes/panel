@@ -1,4 +1,4 @@
-import { IUser } from "./schema/user";
+import { IUser, IContainer } from "./schema";
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
 
 export interface PanelError {
@@ -22,7 +22,15 @@ export const errors = {
     },
     noAuthorizationHeader: {
         name: "NoAuthorizationHeader",
-        translation: "Not Logged In",
+        translation: "🔐 Not Logged In",
+    },
+    dockerFetch: {
+        name: "DeploymentFetch",
+        translation: "🌐 Failed To Fetch Deployment",
+    },
+    denied: {
+        name: "AccessDenied",
+        translation: "❌ Permission Denied",
     },
 };
 
@@ -39,6 +47,10 @@ export interface ProfileResponse extends ErrorResponse {
      */
     username?: string;
     user?: IUser;
+}
+
+export interface ContainerResponse extends ErrorResponse {
+    containers: IContainer[];
 }
 
 export type LoginInput = Omit<IUser, "id" | "roles">;
@@ -101,6 +113,32 @@ export class PanelApi {
         });
     }
 
+    getDeployments() {
+        return new Promise<AxiosResponse<ContainerResponse>>(
+            (resolve, reject) => {
+                return this.client
+                    .get<ContainerResponse>("/deployment/all", {
+                        headers: {
+                            Authorization: this.storage.getItem("token"),
+                        },
+                    })
+                    .then((res) => {
+                        if (res.status !== 200 && res.data.error) {
+                            this.handleError(res.data.error.translation);
+                            return reject(res);
+                        }
+                        resolve(res);
+                    })
+                    .catch((err: AxiosError) => {
+                        this.handleError(
+                            err.response?.data.error?.translation || err.message
+                        );
+                        reject(err);
+                    });
+            }
+        );
+    }
+
     getProfile() {
         return new Promise<AxiosResponse<ProfileResponse>>(
             (resolve, reject) => {
@@ -111,7 +149,7 @@ export class PanelApi {
                         },
                     })
                     .then((res) => {
-                        // TODO: better error message api
+                        // TODO: better error message api with language translations
                         if (res.status !== 200 && res.data.error) {
                             this.handleError(res.data.error.translation);
                             return reject(res);

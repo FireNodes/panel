@@ -4,10 +4,17 @@ import { loadConfig } from "./config";
 import * as jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
 import cors from "cors";
-import { errors } from "@flowtr/panel-sdk";
+import {
+    ErrorResponse,
+    errors,
+    IContainer,
+    IPort,
+    LoginResponse,
+    ProfileResponse,
+} from "@flowtr/panel-sdk";
 import Docker from "dockerode";
 
-// TODO: cli for migration and running the server w/ yargs
+// TODO: restructure api with seperate routers
 export const startBackend = async () => {
     const config = loadConfig();
     const port = parseInt(process.env.PORT || "8080");
@@ -23,13 +30,13 @@ export const startBackend = async () => {
         if (!authHeader)
             return res.status(400).json({
                 error: errors.noAuthorizationHeader,
-            });
+            } as ErrorResponse);
         try {
             return jwt.verify(authHeader, config.toObject().jwtSecret);
         } catch (err) {
             return res.status(400).json({
                 error: errors.invalidToken,
-            });
+            } as ErrorResponse);
         }
     };
 
@@ -41,8 +48,13 @@ export const startBackend = async () => {
 
     // TODO: admin only
     app.get("/user/all", async (req, res) => {
+        const user = await getUser(req, res);
+        if (!user?.roles.includes("admin"))
+            return res.status(400).json({
+                error: errors.denied,
+            } as ErrorResponse);
         const result = await User.find();
-        res.json({
+        return res.json({
             users: result,
         });
     });
@@ -52,7 +64,7 @@ export const startBackend = async () => {
         if (user)
             return res.json({
                 user,
-            });
+            } as ProfileResponse);
     });
 
     app.post("/auth/login", async (req, res) => {
@@ -63,11 +75,11 @@ export const startBackend = async () => {
             return res.status(401).json({
                 error: errors.userNotFound,
                 username: req.body.username,
-            });
+            } as LoginResponse);
         if (!(await compare(req.body.password, existingUser.password)))
             return res.status(401).json({
                 error: errors.invalidPassword,
-            });
+            } as LoginResponse);
         const token = jwt.sign(
             {
                 id: existingUser.id,
@@ -78,17 +90,50 @@ export const startBackend = async () => {
         );
         return res.json({
             token,
-        });
+        } as LoginResponse);
     });
 
     app.get("/deployment/all", async (req, res) => {
-        const containers = await docker.listContainers();
-        const filteredContainers = containers.map((c) =>
-            c.Names[0].startsWith("deployment_")
-        );
-        return res.json({
-            filteredContainers,
-        });
+        try {
+            const user = await getUser(req, res);
+            if (!user)
+                return res.status(500).json({
+                    error: errors.userNotFound,
+                } as ErrorResponse);
+            /*             if (!user?.roles.includes("deployer"))
+                return res.status(400).json({
+                    error: errors.denied,
+                } as ErrorResponse); */
+            const containers = await docker.listContainers();
+            const filteredContainers = containers.filter(
+                (c) =>
+                    c.Names.some((n) => n.startsWith("/deployment_")) &&
+                    c.Labels["com.firenodes.panel.user"] === user.id
+            );
+            return res.json({
+                containers: filteredContainers.map(
+                    (c) =>
+                        ({
+                            id: c.Id,
+                            status: c.State,
+                            labels: c.Labels,
+                            names: c.Names.map((n) => n.substr(1)),
+                            ports: c.Ports.map(
+                                (p) =>
+                                    ({
+                                        privatePort: p.PrivatePort,
+                                        publicPort: p.PublicPort,
+                                        type: p.Type,
+                                    } as IPort)
+                            ),
+                        } as IContainer)
+                ),
+            });
+        } catch (err) {
+            res.status(500).json({
+                error: errors.dockerFetch,
+            } as ErrorResponse);
+        }
     });
 
     app.use((err, req, res, next) => {

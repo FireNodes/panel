@@ -17,15 +17,21 @@ export const Header = () => (
             </Link>
         </Heading>
         <Flex
-            className="header-profile"
+            className="header-navigation"
             justifyContent="center"
             ml="auto"
             alignItems="center"
         >
+            {sessionStorage.getItem("token") !== null && (
+                <Link as={WLink} href="/deployment/all" mr="1.5em">
+                    Deployments
+                </Link>
+            )}
             <Link
                 as={WLink}
+                mr="1.5em"
                 href={
-                    localStorage.getItem("token") !== null
+                    sessionStorage.getItem("token") !== null
                         ? "/dashboard/profile"
                         : "/dashboard/login"
                 }

@@ -9,7 +9,8 @@
     ],
     "scripts": {
         "lint": "eslint packages/*/src/**/*.{ts,tsx} --fix",
-        "build": "pnpm run build -r"
+        "build": "pnpm run build -r",
+        "commit": "cz"
     },
     "devDependencies": {
         "@types/chai": "4.2.18",
@@ -30,4 +31,3 @@
         "typescript": "4.2.4"
     }
 }
-
