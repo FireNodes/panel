@@ -6,7 +6,7 @@ import storage from "@plq/use-persisted-state/lib/storages/session-storage";
 export const handleError = (err?: string) => err && toast.dark(err);
 
 export const api = new PanelApi(
-    (import.meta.env.API || "http://localhost:8080").toString(),
+    (import.meta.env.VITE_API || "http://localhost:8080").toString(),
     storage,
     handleError
 );
