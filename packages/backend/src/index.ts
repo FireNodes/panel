@@ -5,9 +5,10 @@ import * as jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
 import cors from "cors";
 import {
+    deploymentSchema,
     ErrorResponse,
     errors,
-    IContainer,
+    IDeployment,
     IPort,
     LoginResponse,
     ProfileResponse,
@@ -103,35 +104,155 @@ export const startBackend = async () => {
                 return res.status(400).json({
                     error: errors.denied,
                 } as ErrorResponse); */
-            const containers = await docker.listContainers();
-            const filteredContainers = containers.filter(
-                (c) =>
-                    c.Names.some((n) => n.startsWith("/deployment_")) &&
-                    c.Labels["com.firenodes.panel.user"] === req.user?.id
-            );
+            const containers = await docker.listContainers({
+                filters: {
+                    label: [`com.firenodes.panel.user=${req.user?.id}`],
+                },
+                all: true,
+            });
+            const filteredContainers: Docker.ContainerInspectInfo[] = [];
+
+            for await (const c of containers)
+                try {
+                    const container = await docker.getContainer(c.Id).inspect();
+                    filteredContainers.push(container);
+                } catch {}
 
             return res.json({
                 containers: filteredContainers.map(
                     (c) =>
                         ({
                             id: c.Id,
-                            status: c.State,
-                            labels: c.Labels,
-                            names: c.Names.map((n) => n.substr(1)),
-                            ports: c.Ports.map(
-                                (p) =>
-                                    ({
-                                        privatePort: p.PrivatePort,
-                                        publicPort: p.PublicPort,
-                                        type: p.Type,
-                                    } as IPort)
-                            ),
-                        } as IContainer)
+                            status: c.State.Running,
+                            image: c.Config.Image,
+                            labels: c.Config.Labels,
+                            name:
+                                c.Config.Labels[
+                                    "com.firenodes.panel.deployment.name"
+                                ] || c.Name,
+                            ports: Object.entries<{ HostPort: string }[]>(
+                                c.HostConfig.PortBindings
+                            )
+                                .filter((p) => p[0] && p[1])
+                                .map(
+                                    (p) =>
+                                        ({
+                                            privatePort: parseInt(
+                                                p[0].includes("/")
+                                                    ? p[0].split("/")[0]
+                                                    : p[0]
+                                            ),
+                                            publicPort: parseInt(
+                                                p[1][0].HostPort
+                                            ),
+                                        } as IPort)
+                                ),
+                        } as IDeployment)
+                ),
+            });
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({
+                error: errors.dockerFetch,
+            } as ErrorResponse);
+        }
+    });
+
+    app.get("/deployment/one/:id", getUser, async (req, res) => {
+        try {
+            if (!req.user)
+                return res.status(500).json({
+                    error: errors.userNotFound,
+                } as ErrorResponse);
+            /*             if (!user?.roles.includes("deployer"))
+                return res.status(400).json({
+                    error: errors.denied,
+                } as ErrorResponse); */
+            const filteredContainers: Docker.ContainerInspectInfo[] = [
+                await docker.getContainer(req.params.id).inspect(),
+            ];
+            // console.log(filteredContainers);
+
+            return res.json({
+                containers: filteredContainers.map(
+                    (c) =>
+                        ({
+                            id: c.Id,
+                            status: c.State.Running,
+                            image: c.Config.Image,
+                            labels: c.Config.Labels,
+                            name:
+                                c.Config.Labels[
+                                    "com.firenodes.panel.deployment.name"
+                                ] || c.Name,
+                            ports: Object.entries<{ HostPort: string }[]>(
+                                c.HostConfig.PortBindings
+                            )
+                                .filter((p) => p[0] && p[1])
+                                .map(
+                                    (p) =>
+                                        ({
+                                            privatePort: parseInt(
+                                                p[0].includes("/")
+                                                    ? p[0].split("/")[0]
+                                                    : p[0]
+                                            ),
+                                            publicPort: parseInt(
+                                                p[1][0].HostPort
+                                            ),
+                                        } as IPort)
+                                ),
+                        } as IDeployment)
                 ),
             });
         } catch (err) {
             return res.status(500).json({
                 error: errors.dockerFetch,
+            } as ErrorResponse);
+        }
+    });
+
+    app.post("/deploy", getUser, async (req, res) => {
+        try {
+            if (!req.user)
+                return res.status(500).json({
+                    error: errors.userNotFound,
+                } as ErrorResponse);
+            /*             if (!user?.roles.includes("deployer"))
+                return res.status(400).json({
+                    error: errors.denied,
+                } as ErrorResponse); */
+            const deployment = await deploymentSchema.parseAsync(req.body);
+            try {
+                await docker.pull(deployment.image);
+            } catch (err) {
+                console.debug(
+                    `Unable to pull image ${deployment.image}: ${err}`
+                );
+            }
+            const container = await docker.createContainer({
+                name: `deployment_${deployment.id}`,
+                Image: deployment.image,
+                Labels: {
+                    "com.firenodes.panel.user": req.user?.id,
+                    "com.firenodes.panel.deployment": deployment.id,
+                    "com.firenodes.panel.deployment.name": deployment.name,
+                },
+                ExposedPorts: { "80/tcp:": {} },
+                HostConfig: {
+                    PortBindings: { "80/tcp": [{ HostPort: "5000" }] },
+                },
+            });
+
+            await container.start();
+
+            return res.json({
+                container: await container.inspect(),
+                deployment,
+            });
+        } catch (err) {
+            return res.status(500).json({
+                error: err,
             } as ErrorResponse);
         }
     });

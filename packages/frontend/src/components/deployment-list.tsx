@@ -1,13 +1,19 @@
-import { Button, Flex, Heading, Text } from "@chakra-ui/react";
-import { IContainer, toTitleCase } from "@flowtr/panel-sdk";
+import { Button, Circle, Flex, Heading, Text } from "@chakra-ui/react";
+import { IDeployment, toTitleCase } from "@flowtr/panel-sdk";
 import { useEffect, useState } from "preact/hooks";
 import { api } from "../lib/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRedo } from "@fortawesome/free-solid-svg-icons";
+import {
+    faCloudUploadAlt,
+    faMinus,
+    faRedo,
+} from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "wouter";
 
-export const ContainerList = () => {
-    const [containers, setContainers] = useState<IContainer[]>([]);
+export const DeploymentList = () => {
+    const [containers, setContainers] = useState<IDeployment[]>([]);
     const [reload, setReload] = useState<boolean>(false);
+    const [, setLocation] = useLocation();
 
     useEffect(() => {
         api.getDeployments().then((res) => setContainers(res.data.containers));
@@ -23,75 +29,61 @@ export const ContainerList = () => {
             <Heading as="h2" mb="0.5em">
                 Deployment List
             </Heading>
-            <Button onClick={() => setReload(!reload)} mb="1.5em">
-                <FontAwesomeIcon icon={faRedo} />
-            </Button>
             <Flex
                 justifyContent="center"
                 alignItems="center"
                 flexDirection="row"
                 flexWrap="wrap"
             >
+                <Button
+                    onClick={() => setLocation("/dashboard/deploy")}
+                    mb="1.5em"
+                    mr="1.5em"
+                >
+                    <FontAwesomeIcon title="Deploy" icon={faCloudUploadAlt} />
+                    <Text ml="0.5em">Deploy</Text>
+                </Button>
+                <Button onClick={() => setReload(!reload)} mb="1.5em">
+                    <FontAwesomeIcon icon={faRedo} />
+                    <Text ml="0.5em">Reload</Text>
+                </Button>
+            </Flex>
+            <Flex
+                justifyContent="center"
+                alignItems="center"
+                flexDirection="column"
+                flexWrap="wrap"
+            >
+                {containers.length === 0 && <Text>No containers found.</Text>}
                 {containers.map((c) => (
-                    <Flex
-                        justifyContent="center"
-                        alignItems="center"
-                        flexDirection="column"
-                        bg="gray.700"
-                        p="1.5em"
-                        borderRadius="1.5em"
+                    <Button
+                        onClick={() =>
+                            setLocation(`/dashboard/deployment/${c.id}`)
+                        }
+                        mb="1.5em"
                     >
                         <Flex
                             justifyContent="center"
                             alignItems="center"
-                            flexDirection="column"
-                            mb="1.5em"
+                            flexDirection="row"
+                            minW="25em"
                         >
-                            <Heading as="h3" fontSize="1.5em">
-                                Identifier
-                            </Heading>
-                            <Text>{c.id}</Text>
+                            <Text mr="0.5em" ml="0.5em">
+                                {toTitleCase(c.name)}
+                            </Text>
+                            <FontAwesomeIcon icon={faMinus} />
+                            <Text mr="0.5em" ml="0.5em">
+                                {toTitleCase(c.image.split(":")[0])}
+                            </Text>
+                            <FontAwesomeIcon icon={faMinus} />
+                            <Circle
+                                ml="0.5em"
+                                mr="0.5em"
+                                size="1em"
+                                bg={c.status ? "#42f563" : "#f56642"}
+                            />
                         </Flex>
-
-                        <Flex
-                            justifyContent="center"
-                            alignItems="center"
-                            flexDirection="column"
-                            mb="1.5em"
-                        >
-                            <Heading as="h3" fontSize="1.5em">
-                                Status
-                            </Heading>
-                            <Text>{toTitleCase(c.status)}</Text>
-                        </Flex>
-
-                        {c.imageID && (
-                            <Flex
-                                justifyContent="center"
-                                alignItems="center"
-                                flexDirection="column"
-                                mb="1.5em"
-                            >
-                                <Heading as="h3" fontSize="1.5em">
-                                    Image Identifier
-                                </Heading>
-                                <Text>{c.imageID}</Text>
-                            </Flex>
-                        )}
-
-                        {c.names && (
-                            <Flex
-                                justifyContent="center"
-                                alignItems="center"
-                                flexDirection="column"
-                            >
-                                <Heading as="h3" fontSize="1.5em">
-                                    Names
-                                </Heading>
-                                <Text>{c.names.join(", ")}</Text>
-                            </Flex>
-                        )}
-                    </Flex>
+                    </Button>
                 ))}
             </Flex>
         </Flex>

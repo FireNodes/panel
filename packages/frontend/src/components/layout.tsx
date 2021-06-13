@@ -10,7 +10,9 @@ import { Header } from "./header";
 import { Profile } from "./profile";
 import { Login } from "./login";
 import { ToastContainer } from "react-toastify";
-import { ContainerList } from "./deployment-list";
+import { DeploymentList } from "./deployment-list";
+import { DeployForm } from "./deploy";
+import { DeploymentInfo } from "./deployment-info";
 
 export const Layout = () => (
     <Router>
@@ -22,7 +24,8 @@ export const Layout = () => (
                     alignItems="center"
                     flexDirection="column"
                     p="1em"
-                    height="100%"
+                    w="100%"
+                    h="100%"
                 >
                     <ToastContainer
                         position="top-right"
@@ -42,7 +45,15 @@ export const Layout = () => (
                         <Profile />
                     </Route>
                     <Route path="/dashboard/deployments">
-                        <ContainerList />
+                        <DeploymentList />
+                    </Route>
+                    <Route path="/dashboard/deploy">
+                        <DeployForm />
+                    </Route>
+                    <Route path="/dashboard/deployment/:id">
+                        {(params: { id: string }) => (
+                            <DeploymentInfo id={params.id}></DeploymentInfo>
+                        )}
                     </Route>
                 </Flex>
             </ColorModeProvider>

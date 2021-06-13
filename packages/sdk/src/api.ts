@@ -1,4 +1,4 @@
-import { IUser, IContainer } from "./schema";
+import { IUser, IDeployment, IDeploymentInput } from "./schema";
 import axios, { AxiosError, AxiosInstance } from "axios";
 import { Storage } from "./util";
 
@@ -50,8 +50,13 @@ export interface ProfileResponse extends ErrorResponse {
     user?: IUser;
 }
 
-export interface ContainerResponse extends ErrorResponse {
-    containers: IContainer[];
+export interface DeploymentResponse extends ErrorResponse {
+    containers: IDeployment[];
+}
+
+export interface DeployResponse extends ErrorResponse {
+    container?: unknown;
+    deployment?: IDeployment;
 }
 
 export type LoginInput = Omit<IUser, "id" | "roles">;
@@ -102,7 +107,7 @@ export class PanelApi {
 
     async getDeployments() {
         try {
-            const res = await this.client.get<ContainerResponse>(
+            const res = await this.client.get<DeploymentResponse>(
                 "/deployment/all",
                 {
                     headers: {
@@ -117,7 +122,53 @@ export class PanelApi {
                     (err as AxiosError<LoginResponse>).response?.data.error
                         ?.translation || err.message
                 );
-            this.storage.remove("token");
+            // this.storage.remove("token");
+
+            throw err;
+        }
+    }
+
+    async getDeployment(id: string) {
+        try {
+            const res = await this.client.get<DeploymentResponse>(
+                `/deployment/one/${id}`,
+                {
+                    headers: {
+                        Authorization: this.storage.get("token").token,
+                    },
+                }
+            );
+            return res;
+        } catch (err) {
+            if (axios.isAxiosError(err))
+                this.handleError(
+                    (err as AxiosError<LoginResponse>).response?.data.error
+                        ?.translation || err.message
+                );
+            // this.storage.remove("token");
+
+            throw err;
+        }
+    }
+
+    async deploy(data: IDeploymentInput) {
+        try {
+            const res = await this.client.post<DeployResponse>(
+                "/deploy",
+                data,
+                {
+                    headers: {
+                        Authorization: this.storage.get("token").token,
+                    },
+                }
+            );
+            return res;
+        } catch (err) {
+            if (axios.isAxiosError(err))
+                this.handleError(
+                    (err as AxiosError<LoginResponse>).response?.data.error
+                        ?.translation || err.message
+                );
 
             throw err;
         }
