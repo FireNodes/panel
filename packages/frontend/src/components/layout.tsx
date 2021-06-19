@@ -2,7 +2,6 @@ import {
     ChakraProvider,
     ColorModeProvider,
     Flex,
-    Heading,
     Text,
 } from "@chakra-ui/react";
 import { Router, Route } from "wouter";
@@ -11,6 +10,9 @@ import { Header } from "./header";
 import { Profile } from "./profile";
 import { Login } from "./login";
 import { ToastContainer } from "react-toastify";
+import { DeploymentList } from "./deployment-list";
+import { DeployForm } from "./deploy";
+import { DeploymentInfo } from "./deployment-info";
 
 export const Layout = () => (
     <Router>
@@ -22,7 +24,8 @@ export const Layout = () => (
                     alignItems="center"
                     flexDirection="column"
                     p="1em"
-                    height="100%"
+                    w="100%"
+                    h="100%"
                 >
                     <ToastContainer
                         position="top-right"
@@ -31,13 +34,26 @@ export const Layout = () => (
                     />
                     <Route path="/">
                         {/*TODO: configurable welcome message*/}
-                        <Text>Welcome to your new panel instance.</Text>
+                        <Text fontWeight="bolder" fontSize="110%">
+                            Welcome to your new panel instance.
+                        </Text>
                     </Route>
                     <Route path="/dashboard/login">
                         <Login />
                     </Route>
                     <Route path="/dashboard/profile">
                         <Profile />
+                    </Route>
+                    <Route path="/dashboard/deployments">
+                        <DeploymentList />
+                    </Route>
+                    <Route path="/dashboard/deploy">
+                        <DeployForm />
+                    </Route>
+                    <Route path="/dashboard/deployment/:id">
+                        {(params: { id: string }) => (
+                            <DeploymentInfo id={params.id}></DeploymentInfo>
+                        )}
                     </Route>
                 </Flex>
             </ColorModeProvider>

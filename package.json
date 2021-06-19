@@ -4,12 +4,24 @@
     "author": "Theo Paris <theoparisdesigns@gmail.com>",
     "license": "GPL-3.0-or-later",
     "private": true,
+    "husky": {
+        "hooks": {
+            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+        }
+    },
     "workspaces": [
         "packages/*"
     ],
+    "config": {
+        "commitizen": {
+            "path": "cz-conventional-changelog"
+        }
+    },
     "scripts": {
         "lint": "eslint packages/*/src/**/*.{ts,tsx} --fix",
-        "build": "pnpm run build -r"
+        "build": "pnpm run build -r",
+        "commit": "cz",
+        "prepare": "husky install"
     },
     "devDependencies": {
         "@types/chai": "4.2.18",
@@ -23,6 +35,7 @@
         "eslint": "7.28.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-plugin-prettier": "3.4.0",
+        "husky": "^6.0.0",
         "mocha": "9.0.0",
         "nyc": "15.1.0",
         "prettier": "2.3.1",
@@ -30,4 +43,3 @@
         "typescript": "4.2.4"
     }
 }
-

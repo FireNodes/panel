@@ -1,11 +1,17 @@
-import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { ErrorResponse, PanelApi } from "@flowtr/panel-sdk";
+import { PanelApi } from "@flowtr/panel-sdk";
+import storage from "@plq/use-persisted-state/lib/storages/session-storage";
+// import { createPersistedState } from "@plq/use-persisted-state";
 
 export const handleError = (err?: string) => err && toast.dark(err);
 
 export const api = new PanelApi(
-    (import.meta.env.API || "http://localhost:8080").toString(),
-    sessionStorage,
+    (import.meta.env.VITE_API || "http://localhost:8080").toString(),
+    storage,
     handleError
 );
+
+/* const [usePersistedState] = createPersistedState("auth", storage);
+export { usePersistedState };
+ */
+export { storage };
