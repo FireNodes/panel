@@ -110,12 +110,11 @@ importers:
       eslint: 7.28.0
       eslint-config-prettier: 8.3.0_eslint@7.28.0
       eslint-plugin-prettier: 3.4.0_441ef98f5280b4c825fe505e43fc5698
-      nodemon: 2.0.7
       mocha: 9.0.0
+      nodemon: 2.0.7
       nyc: 15.1.0
       prettier: 2.3.1
       ts-mocha: 8.0.0_mocha@9.0.0
-      ts-node-dev: 1.1.6_typescript@4.2.4
       typescript: 4.2.4
 
   packages/frontend:
