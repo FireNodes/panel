@@ -1,6 +1,14 @@
 {
-    "extends": ["config:base", "group:allNonMajor"],
+    "extends": ["config:base", "group:monorepos"],
     "includeForks": true,
+    "semanticCommits": true,
+    "rangeStrategy": "bump",
+    "packageRules": [
+        {
+            "packagePatterns": ["eslint"],
+            "groupName": "eslint"
+        }
+    ],
     "dependencyDashboard": true,
     "schedule": ["every weekend"]
 }

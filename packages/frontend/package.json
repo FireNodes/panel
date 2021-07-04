@@ -50,7 +50,7 @@
         "@chakra-ui/react": "1.6.4",
         "@emotion/react": "11.4.0",
         "@emotion/styled": "11.3.0",
-        "@flowtr/panel-sdk": "workspace:*",
+        "@flowtr/panel-sdk": "workspace:^0.0.1",
         "@fontsource/fira-code": "4.4.5",
         "@fontsource/open-sans": "4.4.5",
         "@fontsource/poppins": "4.4.5",
@@ -60,7 +60,7 @@
         "@plq/use-persisted-state": "1.1.2",
         "axios": "0.21.1",
         "framer-motion": "4.1.17",
-        "preact": "10.5.13",
+        "preact": "^10.5.14",
         "react-hook-form": "7.9.0",
         "react-toastify": "7.0.4",
         "wouter": "2.7.4"
