@@ -15,7 +15,7 @@ importers:
       eslint: 7.29.0
       eslint-config-prettier: 8.3.0
       eslint-plugin-prettier: 3.4.0
-      husky: 6.0.0
+      husky: 7.0.0
       mocha: 9.0.1
       nyc: 15.1.0
       prettier: 2.3.2
@@ -33,7 +33,7 @@ importers:
       eslint: 7.29.0
       eslint-config-prettier: 8.3.0_eslint@7.29.0
       eslint-plugin-prettier: 3.4.0_4e72879372edbffcbdaf0fa17b22c203
-      husky: 6.0.0
+      husky: 7.0.0
       mocha: 9.0.1
       nyc: 15.1.0
       prettier: 2.3.2
@@ -3486,8 +3486,9 @@ packages:
       - supports-color
     dev: false
 
-  /husky/6.0.0:
-    resolution: {integrity: sha512-SQS2gDTB7tBN486QSoKPKQItZw97BMOd+Kdb6ghfpBc0yXyzrddI0oDV5MkDAbuB4X2mO3/nj60TRMcYxwzZeQ==}
+  /husky/7.0.0:
+    resolution: {integrity: sha512-xK7lO0EtSzfFPiw+oQncQVy/XqV7UVVjxBByc+Iv5iK3yhW9boDoWgvZy3OGo48QKg/hUtZkzz0hi2HXa0kn7w==}
+    engines: {node: '>=12'}
     hasBin: true
     dev: true
 
