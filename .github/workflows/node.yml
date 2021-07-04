@@ -18,7 +18,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             - run: npm add -g yarn
-            - run: yarn
+            - run: yarn install
             - run: yarn workspaces foreach run build
               env:
                   CI: true
