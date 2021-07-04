@@ -9,7 +9,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [15.x]
+                node-version: [16.x]
 
         steps:
             - uses: actions/checkout@v2
@@ -17,9 +17,9 @@ jobs:
               uses: actions/setup-node@v2
               with:
                   node-version: ${{ matrix.node-version }}
-            - run: npm add -g pnpm
-            - run: pnpm install
-            - run: pnpm run build
+            - run: npm add -g yarn
+            - run: yarn
+            - run: yarn workspaces foreach run build
               env:
                   CI: true
     lint:
@@ -27,7 +27,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [15.x]
+                node-version: [16.x]
 
         steps:
             - uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
             - run: npm add -g pnpm
-            - run: pnpm install
-            - run: pnpm run lint -- --no-fix
+            - run: yarn install
+            - run: yarn run lint -- --no-fix
               env:
                   CI: true

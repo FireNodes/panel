@@ -2,7 +2,7 @@
     "name": "@flowtr/panel-backend",
     "version": "0.0.1",
     "private": true,
-    "description": "Jsonite backend",
+    "description": "Flowtr panel backend",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "bin": {
