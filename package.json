@@ -10,7 +10,9 @@
         }
     },
     "workspaces": [
-        "packages/*"
+        "packages/sdk",
+        "packages/backend",
+        "packages/frontend"
     ],
     "config": {
         "commitizen": {

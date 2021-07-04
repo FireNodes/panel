@@ -1477,7 +1477,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flowtr/panel-backend@workspace:packages/backend"
   dependencies:
-    "@flowtr/panel-sdk": "workspace:*"
+    "@flowtr/panel-sdk": "workspace:^0.0.1"
     "@theoparis/config": 1.0.5
     "@types/bcrypt": 5.0.0
     "@types/chai": 4.2.19
@@ -1525,7 +1525,7 @@ __metadata:
     "@chakra-ui/react": 1.6.4
     "@emotion/react": 11.4.0
     "@emotion/styled": 11.3.0
-    "@flowtr/panel-sdk": "workspace:*"
+    "@flowtr/panel-sdk": "workspace:^0.0.1"
     "@fontsource/fira-code": 4.4.5
     "@fontsource/open-sans": 4.4.5
     "@fontsource/poppins": 4.4.5
@@ -1561,7 +1561,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flowtr/panel-sdk@workspace:*, @flowtr/panel-sdk@workspace:packages/sdk":
+"@flowtr/panel-sdk@workspace:^0.0.1, @flowtr/panel-sdk@workspace:packages/sdk":
   version: 0.0.0-use.local
   resolution: "@flowtr/panel-sdk@workspace:packages/sdk"
   dependencies:

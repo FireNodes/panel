@@ -50,7 +50,7 @@
         "@chakra-ui/react": "1.6.4",
         "@emotion/react": "11.4.0",
         "@emotion/styled": "11.3.0",
-        "@flowtr/panel-sdk": "workspace:*",
+        "@flowtr/panel-sdk": "workspace:^0.0.1",
         "@fontsource/fira-code": "4.4.5",
         "@fontsource/open-sans": "4.4.5",
         "@fontsource/poppins": "4.4.5",
