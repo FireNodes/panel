@@ -1551,7 +1551,7 @@ __metadata:
     nyc: 15.1.0
     preact: ^10.5.14
     prettier: 2.3.2
-    react-hook-form: 7.9.0
+    react-hook-form: 7.10.1
     react-toastify: 7.0.4
     ts-mocha: 8.0.0
     typescript: 4.3.4
@@ -6935,12 +6935,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-hook-form@npm:7.9.0":
-  version: 7.9.0
-  resolution: "react-hook-form@npm:7.9.0"
+"react-hook-form@npm:7.10.1":
+  version: 7.10.1
+  resolution: "react-hook-form@npm:7.10.1"
   peerDependencies:
     react: ^16.8.0 || ^17
-  checksum: 5a41180ba17bdb1732552e8554e59e9633ae865807859106ab74117d81986d02b3479005e585e5259b2a5b0a131fc11ca7ba5816eba2214ac6d5dbce23f03ea1
+  checksum: e19c354d61a5cc5625b1adda8add2eea0612901e4985a21bf90c06cb0ddef41541b66106ef4160936852ce9fa5a21cb213c5301b7f8633021569a68ebb3c8655
   languageName: node
   linkType: hard
 

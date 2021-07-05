@@ -61,7 +61,7 @@
         "axios": "0.21.1",
         "framer-motion": "4.1.17",
         "preact": "^10.5.14",
-        "react-hook-form": "7.9.0",
+        "react-hook-form": "7.10.1",
         "react-toastify": "7.0.4",
         "wouter": "2.7.4"
     }
