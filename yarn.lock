@@ -1487,7 +1487,7 @@ __metadata:
     "@types/jsonwebtoken": 8.5.3
     "@types/mocha": 8.2.2
     "@types/node": 15.12.1
-    "@types/yargs": 17.0.0
+    "@types/yargs": 17.0.2
     "@typescript-eslint/eslint-plugin": 4.28.2
     "@typescript-eslint/parser": 4.28.2
     axios: 0.21.1
@@ -2173,12 +2173,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/yargs@npm:17.0.0":
-  version: 17.0.0
-  resolution: "@types/yargs@npm:17.0.0"
+"@types/yargs@npm:17.0.2":
+  version: 17.0.2
+  resolution: "@types/yargs@npm:17.0.2"
   dependencies:
     "@types/yargs-parser": "*"
-  checksum: a9963dd351737a4f03eeda631848e1e0a8d687a8d463c882a5446ca0b420cd78b7b1c87e22e7a48429809281dd9dd1c0bfe8442100d4172919c30c7294f11e8b
+  checksum: 6f4600d3b786c0eb083782f59c9ed61bb4c204269b0a07819bb9e9b1fc29deaf4fe28abde7dca5fbf3cf851beca9458cbcf63ebd128ebfe83d31002d84337b31
   languageName: node
   linkType: hard
 

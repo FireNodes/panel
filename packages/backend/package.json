@@ -39,7 +39,7 @@
         "@types/jsonwebtoken": "8.5.3",
         "@types/mocha": "8.2.2",
         "@types/node": "15.12.1",
-        "@types/yargs": "17.0.0",
+        "@types/yargs": "17.0.2",
         "@typescript-eslint/eslint-plugin": "4.28.2",
         "@typescript-eslint/parser": "4.28.2",
         "chai": "4.3.4",
