@@ -1512,7 +1512,7 @@ __metadata:
     typeorm: 0.2.34
     typescript: 4.3.5
     yargs: 17.0.1
-    zod: 3.4.2
+    zod: 3.5.1
   bin:
     fdpla: ./dist/cli.js
   languageName: unknown
@@ -1583,7 +1583,7 @@ __metadata:
     prettier: 2.3.2
     ts-mocha: 8.0.0
     typescript: 4.3.5
-    zod: ^3.4.2
+    zod: ^3.5.1
   languageName: unknown
   linkType: soft
 
@@ -8720,10 +8720,10 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"zod@npm:3.4.2, zod@npm:^3.4.2":
-  version: 3.4.2
-  resolution: "zod@npm:3.4.2"
-  checksum: 69c44763a1060a8a30a0f047d5590651434b230c8cebdaa4b74be054df6b4b79f817c10c9b268b2e70167d1807c1717960a6fec534ca525198d5fdce41ccffda
+"zod@npm:3.5.1, zod@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "zod@npm:3.5.1"
+  checksum: e5cf3f4ac4b1f532ab29310cfe2518a593c6c7cc4c5c6e000dedc7ce0ce62767f343543fe0e2bb17850b2759001f324b603036888c451dc2831c428dc62938c1
   languageName: node
   linkType: hard
 
