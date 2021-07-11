@@ -1555,7 +1555,7 @@ __metadata:
     react-toastify: 7.0.4
     ts-mocha: 8.0.0
     typescript: 4.3.5
-    vite: 2.3.8
+    vite: 2.4.1
     vite-plugin-env-compatible: 1.0.0
     wouter: 2.7.4
   languageName: unknown
@@ -6657,7 +6657,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.3.4":
+"postcss@npm:^8.3.5":
   version: 8.3.5
   resolution: "postcss@npm:8.3.5"
   dependencies:
@@ -8396,13 +8396,13 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"vite@npm:2.3.8":
-  version: 2.3.8
-  resolution: "vite@npm:2.3.8"
+"vite@npm:2.4.1":
+  version: 2.4.1
+  resolution: "vite@npm:2.4.1"
   dependencies:
     esbuild: ^0.12.8
     fsevents: ~2.3.2
-    postcss: ^8.3.4
+    postcss: ^8.3.5
     resolve: ^1.20.0
     rollup: ^2.38.5
   dependenciesMeta:
@@ -8410,7 +8410,7 @@ typescript@4.3.5:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 6f2d94476e84944a819d1cad3885f276c1a19e94347cdfc6845926668729bb5f07e1c07d6c57f30df727b15c91e3e71a64337549bc0f4aa426ed9951ee3d7b23
+  checksum: 23ce90196cf0e3fafb128b7a00a85737e5cdde7f69684e8759a814e329b932addf5bd02d218b77bd8a7e197ffc8d35634c05b939930e6bbf2709aa133e87660a
   languageName: node
   linkType: hard
 
