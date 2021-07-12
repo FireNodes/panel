@@ -1516,7 +1516,7 @@ __metadata:
     jsonwebtoken: 8.5.1
     mocha: 9.0.2
     nanoid: 3.1.23
-    nodemon: 2.0.9
+    nodemon: 2.0.12
     nyc: 15.1.0
     pg: 8.6.0
     prettier: 2.3.2
@@ -6154,9 +6154,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"nodemon@npm:2.0.9":
-  version: 2.0.9
-  resolution: "nodemon@npm:2.0.9"
+"nodemon@npm:2.0.12":
+  version: 2.0.12
+  resolution: "nodemon@npm:2.0.12"
   dependencies:
     chokidar: ^3.2.2
     debug: ^3.2.6
@@ -6170,7 +6170,7 @@ fsevents@~2.3.2:
     update-notifier: ^4.1.0
   bin:
     nodemon: bin/nodemon.js
-  checksum: 0242661e7038b0a5bd393216188615babf9ecb2d97bd3f8300ee4bc7ce86473b6877181b7f6f3ae94dc025a5fc784743ede40d32cb7c10f07fe718023cf3eabd
+  checksum: c73442ab99c7e614162e87214f0621502654fa571b663a2b4d1c5c2a5ecb610216c53822a228541a5f2bf72bf7bb4c9bfd90448eda500efd989199381ccfa15f
   languageName: node
   linkType: hard
 
