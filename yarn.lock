@@ -1497,7 +1497,7 @@ __metadata:
     "@types/dockerode": 3.2.4
     "@types/express": 4.17.12
     "@types/jsonwebtoken": 8.5.3
-    "@types/mocha": 8.2.2
+    "@types/mocha": 8.2.3
     "@types/node": 15.12.1
     "@types/yargs": 17.0.2
     "@typescript-eslint/eslint-plugin": 4.28.2
@@ -1547,7 +1547,7 @@ __metadata:
     "@plq/use-persisted-state": 1.1.2
     "@preact/preset-vite": 2.1.0
     "@types/chai": 4.2.19
-    "@types/mocha": 8.2.2
+    "@types/mocha": 8.2.3
     "@types/node": 15.12.1
     "@typescript-eslint/eslint-plugin": 4.28.2
     "@typescript-eslint/parser": 4.28.2
@@ -1578,7 +1578,7 @@ __metadata:
   resolution: "@flowtr/panel-sdk@workspace:packages/sdk"
   dependencies:
     "@types/chai": 4.2.19
-    "@types/mocha": 8.2.2
+    "@types/mocha": 8.2.3
     "@types/node": 15.12.1
     "@typescript-eslint/eslint-plugin": 4.28.2
     "@typescript-eslint/parser": 4.28.2
@@ -1606,7 +1606,7 @@ __metadata:
     "@commitlint/cli": ^12.1.4
     "@commitlint/config-conventional": ^12.1.4
     "@types/chai": 4.2.19
-    "@types/mocha": 8.2.2
+    "@types/mocha": 8.2.3
     "@types/node": 15.12.1
     "@typescript-eslint/eslint-plugin": 4.28.2
     "@typescript-eslint/parser": 4.28.2
@@ -2096,10 +2096,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mocha@npm:8.2.2":
-  version: 8.2.2
-  resolution: "@types/mocha@npm:8.2.2"
-  checksum: 8e1fbc3e98d6bd93fe5b7454c34d53241b9f1947b28c10b8bb340585a9ed303be649b45c36b19236000f82f74e8d3df67ed617ae7baae80ea09d5317dbe080ba
+"@types/mocha@npm:8.2.3":
+  version: 8.2.3
+  resolution: "@types/mocha@npm:8.2.3"
+  checksum: b43ed1b642a2ee62bf10792a07d5d21d66ab8b4d2cf5d822c8a7643e77b90009aecc000eefab5f6ddc9eb69004192f84119a6f97a8499e1a13ea082e7a5e71bf
   languageName: node
   linkType: hard
 

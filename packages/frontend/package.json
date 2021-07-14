@@ -28,7 +28,7 @@
     "devDependencies": {
         "@preact/preset-vite": "2.1.0",
         "@types/chai": "4.2.19",
-        "@types/mocha": "8.2.2",
+        "@types/mocha": "8.2.3",
         "@types/node": "15.12.1",
         "@typescript-eslint/eslint-plugin": "4.28.2",
         "@typescript-eslint/parser": "4.28.2",
