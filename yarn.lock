@@ -1494,7 +1494,7 @@ __metadata:
     "@types/bcrypt": 5.0.0
     "@types/chai": 4.2.19
     "@types/cors": 2.8.10
-    "@types/dockerode": 3.2.3
+    "@types/dockerode": 3.2.4
     "@types/express": 4.17.12
     "@types/jsonwebtoken": 8.5.3
     "@types/mocha": 8.2.2
@@ -2002,12 +2002,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dockerode@npm:3.2.3":
-  version: 3.2.3
-  resolution: "@types/dockerode@npm:3.2.3"
+"@types/dockerode@npm:3.2.4":
+  version: 3.2.4
+  resolution: "@types/dockerode@npm:3.2.4"
   dependencies:
     "@types/node": "*"
-  checksum: d44adb00d5c4fe60acb64e2668452572ec80ed0c52dfddff169d63767e48f8ad254d24ba22f06be8aa53ec39403c99b6b52829ee0114aee880d474d40a2a2964
+  checksum: 3977c85b27e24190c9be396c91b2a682cfb8bcac05a7a3fa42dbb54e9aa14d8b9f56fa81cbf5e1c091e2f93bd9c9bd5ae3dfbac4f7b233778992a6b42f3b4cc4
   languageName: node
   linkType: hard
 
