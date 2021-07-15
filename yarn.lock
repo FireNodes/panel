@@ -1496,7 +1496,7 @@ __metadata:
     "@types/cors": 2.8.10
     "@types/dockerode": 3.2.4
     "@types/express": 4.17.12
-    "@types/jsonwebtoken": 8.5.3
+    "@types/jsonwebtoken": 8.5.4
     "@types/mocha": 8.2.3
     "@types/node": 15.12.1
     "@types/yargs": 17.0.2
@@ -2048,12 +2048,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsonwebtoken@npm:8.5.3":
-  version: 8.5.3
-  resolution: "@types/jsonwebtoken@npm:8.5.3"
+"@types/jsonwebtoken@npm:8.5.4":
+  version: 8.5.4
+  resolution: "@types/jsonwebtoken@npm:8.5.4"
   dependencies:
     "@types/node": "*"
-  checksum: 068722d228b1d1cc10139b9a9e71df75db2579bc036d6c9680792c6711b53bd111bbdfb22b3031b266dfe284b9c91a411d8d63f70ace18804549240e87e9f4b3
+  checksum: 541d41eb8115afd422e0333d7ba79399febc86818015b3ecb7c36b2b7f9b4476a33aa13a4f23f81a08b201c5cdacbe2903b6d03cd4930abf83a4e14be3696719
   languageName: node
   linkType: hard
 
