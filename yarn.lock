@@ -1550,7 +1550,7 @@ __metadata:
     ts-mocha: 8.0.0
     typescript: 4.3.5
     vite: 2.4.1
-    vite-plugin-env-compatible: 1.0.0
+    vite-plugin-env-compatible: 1.1.1
     wouter: 2.7.4
   languageName: unknown
   linkType: soft
@@ -8445,10 +8445,10 @@ typescript@4.3.5:
   languageName: node
   linkType: hard
 
-"vite-plugin-env-compatible@npm:1.0.0":
-  version: 1.0.0
-  resolution: "vite-plugin-env-compatible@npm:1.0.0"
-  checksum: dbdc69604528ba5399a102adfb50c16e1066cb47a185ba494020231570b5ca8740cc92a118829248540b701fc946bcb36dcc5f0a12934db9a3bd9b23e6e23542
+"vite-plugin-env-compatible@npm:1.1.1":
+  version: 1.1.1
+  resolution: "vite-plugin-env-compatible@npm:1.1.1"
+  checksum: 5e7737844250c9184e9f94696ad59d46eb93178e5333d257e7d6e5d868efbbdb482c84830bf07fda3f26bc1455e7eec7c6a35a46d9e29c71f101a351e974cc10
   languageName: node
   linkType: hard
 
