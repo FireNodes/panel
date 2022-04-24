@@ -47,7 +47,7 @@
         "vite-plugin-env-compatible": "1.0.0"
     },
     "dependencies": {
-        "@chakra-ui/react": "1.6.5",
+        "@chakra-ui/react": "1.8.8",
         "@emotion/react": "11.4.0",
         "@emotion/styled": "11.3.0",
         "@flowtr/panel-sdk": "workspace:^0.0.1",
