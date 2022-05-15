@@ -64,7 +64,7 @@
         "dockerode": "3.3.0",
         "express": "4.17.1",
         "jsonwebtoken": "8.5.1",
-        "nanoid": "3.1.23",
+        "nanoid": "3.3.4",
         "pg": "8.6.0",
         "typeorm": "0.2.34",
         "yargs": "17.0.1",
