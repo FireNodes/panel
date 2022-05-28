@@ -1,9 +1,8 @@
-import express, { NextFunction, Request, Response } from "express";
+import fastify, { FastifyRequest, FastifyReply } from "fastify";
 import { connectToDatabase, User } from "./database/index.js";
-import { loadConfig } from "./config";
-import * as jwt from "jsonwebtoken";
+import { loadConfig } from "./config.js";
+import jwt from "jsonwebtoken";
 import { compare } from "bcrypt";
-import cors from "cors";
 import {
     deploymentSchema,
     ErrorResponse,
@@ -14,92 +13,121 @@ import {
     ProfileResponse,
 } from "@flowtr/panel-sdk";
 import Docker from "dockerode";
+import cors from "@fastify/cors";
+import helmet from "@fastify/helmet";
+import { Logger } from "tslog";
 
 // TODO: restructure api with seperate routers
 export const startBackend = async () => {
-    const config = loadConfig();
+    const logger = new Logger({
+        name: "Panel Backend",
+    });
+    const config = await loadConfig();
     const port = parseInt(process.env.PORT || "8080");
-    await connectToDatabase(config.toObject());
-    const app = express();
-    app.disable("etag");
-    app.use(cors(), express.json());
+    await connectToDatabase(config);
+    const app = fastify({
+        logger: true,
+    });
+    app.register(cors);
+    app.register(helmet);
 
-    const docker = new Docker();
+    const docker = new Docker({
+        socketPath: "/run/user/1000/podman/podman.sock",
+    });
 
-    const getAuth = (req: Request, res: Response) => {
+    const getAuth = (req: FastifyRequest, res: FastifyReply) => {
         const authHeader = req.headers.authorization;
-        if (!authHeader)
-            return res.status(400).json({
+        if (!authHeader) {
+            res.code(400);
+            return {
                 error: errors.noAuthorizationHeader,
-            } as ErrorResponse);
+            } as ErrorResponse;
+        }
         try {
-            return jwt.verify(authHeader, config.toObject().jwtSecret);
+            return jwt.verify(authHeader, config.jwtSecret);
         } catch (err) {
-            return res.status(400).json({
+            res.code(400);
+            return {
                 error: errors.invalidToken,
-            } as ErrorResponse);
+            } as ErrorResponse;
         }
     };
 
-    const getUser = async (req: Request, res: Response, next: NextFunction) => {
+    const getUser = async (req: FastifyRequest, res: FastifyReply) => {
         const parsed = getAuth(req, res);
         if (parsed && parsed["id"]) {
             req.user = await User.findOne({ id: parsed["id"] });
-            next();
         }
     };
 
     // TODO: admin only
-    app.get("/user/all", getUser, async (req, res) => {
-        if (!req.user?.roles.includes("admin"))
-            return res.status(400).json({
+    app.get("/user/all", { preHandler: [getUser] }, async (req, res) => {
+        if (!req.user?.roles.includes("admin")) {
+            res.code(400);
+            return {
                 error: errors.denied,
-            } as ErrorResponse);
+            } as ErrorResponse;
+        }
+
         const result = await User.find();
-        return res.json({
+        return {
             users: result,
-        });
+        };
     });
 
-    app.get("/auth/profile", getUser, async (req, res) => {
+    app.get("/auth/profile", { preHandler: [getUser] }, async (req, res) => {
         if (req.user)
-            return res.json({
+            return {
                 user: req.user,
-            } as ProfileResponse);
+            } as ProfileResponse;
     });
 
-    app.post("/auth/login", async (req, res) => {
+    app.post<{
+        Body: {
+            username: string;
+            password: string;
+        };
+    }>("/auth/login", async (req, res) => {
         const existingUser = await User.findOne({
             username: req.body.username,
         });
-        if (!existingUser)
-            return res.status(401).json({
+        if (!existingUser) {
+            res.code(401);
+            return {
                 error: errors.userNotFound,
                 username: req.body.username,
-            } as LoginResponse);
-        if (!(await compare(req.body.password, existingUser.password)))
-            return res.status(401).json({
+            } as LoginResponse;
+        }
+
+        if (!(await compare(req.body.password, existingUser.password))) {
+            res.status(401);
+            return {
                 error: errors.invalidPassword,
-            } as LoginResponse);
+            } as LoginResponse;
+        }
+
         const token = jwt.sign(
             {
                 id: existingUser.id,
                 username: existingUser.username,
             },
-            config.toObject().jwtSecret,
+            config.jwtSecret,
             { expiresIn: "24h" }
         );
-        return res.json({
+        return {
             token,
-        } as LoginResponse);
+        } as LoginResponse;
     });
 
-    app.get("/deployment/all", getUser, async (req, res) => {
+    app.get("/deployment/all", { preHandler: [getUser] }, async (req, res) => {
         try {
-            if (!req.user)
-                return res.status(500).json({
+            if (!req.user) {
+                res.code(500);
+
+                return {
                     error: errors.userNotFound,
-                } as ErrorResponse);
+                } as ErrorResponse;
+            }
             /*             if (!user?.roles.includes("deployer"))
                 return res.status(400).json({
                     error: errors.denied,
@@ -118,7 +146,7 @@ export const startBackend = async () => {
                     filteredContainers.push(container);
                 } catch {}
 
-            return res.json({
+            return {
                 containers: filteredContainers.map(
                     (c) =>
                         ({
@@ -149,21 +177,28 @@ export const startBackend = async () => {
                                 ),
                         } as IDeployment)
                 ),
-            });
+            };
         } catch (err) {
             console.log(err);
-            return res.status(500).json({
+            res.status(500);
+            return {
                 error: errors.dockerFetch,
-            } as ErrorResponse);
+            } as ErrorResponse;
         }
     });
 
-    app.get("/deployment/one/:id", getUser, async (req, res) => {
+    app.get<{
+        Params: {
+            id: string;
+        };
+    }>("/deployment/one/:id", { preHandler: [getUser] }, async (req, res) => {
         try {
-            if (!req.user)
-                return res.status(500).json({
+            if (!req.user) {
+                res.status(500);
+                return {
                     error: errors.userNotFound,
-                } as ErrorResponse);
+                } as ErrorResponse;
+            }
             /*             if (!user?.roles.includes("deployer"))
                 return res.status(400).json({
                     error: errors.denied,
@@ -173,7 +208,7 @@ export const startBackend = async () => {
             ];
             // console.log(filteredContainers);
 
-            return res.json({
+            return {
                 containers: filteredContainers.map(
                     (c) =>
                         ({
@@ -204,20 +239,23 @@ export const startBackend = async () => {
                                 ),
                         } as IDeployment)
                 ),
-            });
+            };
         } catch (err) {
-            return res.status(500).json({
+            res.status(500);
+            return {
                 error: errors.dockerFetch,
-            } as ErrorResponse);
+            } as ErrorResponse;
         }
     });
 
-    app.post("/deploy", getUser, async (req, res) => {
+    app.post("/deploy", { preHandler: [getUser] }, async (req, res) => {
         try {
-            if (!req.user)
-                return res.status(500).json({
+            if (!req.user) {
+                res.status(500);
+                return {
                     error: errors.userNotFound,
-                } as ErrorResponse);
+                } as ErrorResponse;
+            }
             /*             if (!user?.roles.includes("deployer"))
                 return res.status(400).json({
                     error: errors.denied,
@@ -238,7 +276,7 @@ export const startBackend = async () => {
                     "com.firenodes.panel.deployment": deployment.id,
                     "com.firenodes.panel.deployment.name": deployment.name,
                 },
-                ExposedPorts: { "80/tcp:": {} },
+                ExposedPorts: { "80/tcp": {} },
                 HostConfig: {
                     PortBindings: { "80/tcp": [{ HostPort: "5000" }] },
                 },
@@ -246,21 +284,25 @@ export const startBackend = async () => {
 
             await container.start();
 
-            return res.json({
+            return {
                 container: await container.inspect(),
                 deployment,
-            });
+            };
         } catch (err) {
-            return res.status(500).json({
+            res.status(500);
+
+            return {
                 error: err,
-            } as ErrorResponse);
+            } as ErrorResponse;
         }
     });
 
-    app.use((err, req, res, next) => {
-        console.error(err.stack);
-        res.status(500).json(err);
+    app.setErrorHandler((err, _req, res) => {
+        logger.error(err.stack);
+        res.status(500);
+
+        res.send(err);
     });
 
-    app.listen(port, () => console.log(`Listening on :${port}`));
+    app.listen(port, () => logger.info(`Listening on :${port}`));
 };

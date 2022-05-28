@@ -1,3 +1,3 @@
-export * from "./schema";
-export * from "./util";
-export * from "./api";
+export * from "./schema/index.js";
+export * from "./util.js";
+export * from "./api.js";

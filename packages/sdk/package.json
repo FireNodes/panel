@@ -2,9 +2,9 @@
     "name": "@flowtr/panel-sdk",
     "version": "0.0.1",
     "description": "Panel api client",
-    "main": "./dist/cjs/index.js",
-    "exports": "./dist/esm/index.js",
-    "types": "./dist/cjs/index.d.ts",
+    "type": "module",
+    "exports": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "config": {
         "commitizen": {
             "path": "cz-conventional-changelog"
@@ -12,7 +12,7 @@
     },
     "scripts": {
         "cm": "cz",
-        "build": "tsc && tsc -p tsconfig.cjs.json",
+        "build": "tsc",
         "prepublishOnly": "pnpm run lint && pnpm run test && pnpm run build",
         "test": "c8 ava test/**/*.ts",
         "lint": "eslint {src,test}/**/*.ts --fix"

@@ -1,7 +1,19 @@
 {
-    "extends": "./tsconfig.cjs.json",
     "compilerOptions": {
+        "target": "ES2020",
         "module": "ESNext",
-        "outDir": "./dist/esm"
-    }
+        "moduleResolution": "Node",
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "outDir": "dist"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "test/**/*.ts"]
 }
