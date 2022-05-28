@@ -22,7 +22,7 @@
         "cli": "node dist/cli.js",
         "prepublishOnly": "pnpm run lint && pnpm run test && pnpm run build",
         "test": "c8 ava test/**/*.ts",
-        "lint": "eslint {src,test}/**/*.ts --fix"
+        "lint": "eslint '{src,test}/**/*.ts' --fix"
     },
     "keywords": [
         "typescript",
