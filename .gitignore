@@ -11,7 +11,7 @@ logs
 
 # Environment
 *.env*
-config.yml
+config.json5
 
 # Misc
 .DS_Store
@@ -21,11 +21,3 @@ config.yml
 .idea
 data/
 
-# Yarn package manager
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*

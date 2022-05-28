@@ -6,8 +6,8 @@ import { hash } from "bcrypt";
 import { startBackend } from "./index.js";
 
 const setup = async () => {
-    const config = loadConfig();
-    const db = await connectToDatabase(config.toObject());
+    const config = await loadConfig();
+    const db = await connectToDatabase(config);
 
     return { config, db };
 };

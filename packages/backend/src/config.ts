@@ -1,5 +1,6 @@
 import * as z from "zod";
-import { readFile } from "@theoparis/config";
+import json5 from "json5";
+import { readFile } from "fs/promises";
 
 const configSchema = z.object({
     database: z.object({
@@ -11,7 +12,10 @@ const configSchema = z.object({
 
 export type Config = z.infer<typeof configSchema>;
 
-export const loadConfig = (path = `${process.cwd()}/config.yml`) =>
-    readFile<Config>(path, { type: "yaml", schema: configSchema }).validate(
-        true
-    );
+export const loadConfig = async (path = `${process.cwd()}/config.json5`) => {
+    const config = await readFile(path, "utf-8");
+    const parsedConfig = json5.parse(config);
+    const validatedConfig: Config = await configSchema.parseAsync(parsedConfig);
+
+    return validatedConfig;
+};
