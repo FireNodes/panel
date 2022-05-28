@@ -20,9 +20,8 @@
         "start": "node dist/cli.js run",
         "cli": "node dist/cli.js",
         "prepublishOnly": "pnpm run lint && pnpm run test && pnpm run build",
-        "test": "ts-mocha test/**/*.ts",
-        "lint": "eslint {src,test}/**/*.ts --fix",
-        "coverage": "nyc ts-mocha test/**/*.ts"
+        "test": "c8 ava test/**/*.ts",
+        "lint": "eslint {src,test}/**/*.ts --fix"
     },
     "keywords": [
         "typescript",

@@ -1,5 +1,5 @@
 {
-    "extends": ["config:base", "group:monorepos"],
+    "extends": ["config:base", "group:monorepos", "group:allNonMajor"],
     "includeForks": true,
     "semanticCommits": true,
     "rangeStrategy": "bump",
